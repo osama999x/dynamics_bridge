@@ -1,51 +1,75 @@
-export default function Industries() {
-  const industries = [
-    {
-      name: 'Education',
-      image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&h=600&fit=crop',
-      description: 'Empowering educational institutions with innovative solutions.',
-    },
-    {
-      name: 'Manufacturing',
-      image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&h=600&fit=crop',
-      description: 'Streamlining operations for manufacturing excellence.',
-    },
-    {
-      name: 'Food & Beverages',
-      image: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800&h=600&fit=crop',
-      description: 'Optimizing supply chains and quality control.',
-    },
-  ];
+import React from "react";
+import { HiArrowNarrowRight } from "react-icons/hi";
 
+const services = [
+  {
+    title: "Education",
+    img: "/education.avif",
+    description:
+      "Modernising education with technology-driven solutions and tools.",
+  },
+  {
+    title: "Manufacturing",
+    img: "/manufacturing.avif",
+    description:
+      "Optimising manufacturing operations with scalable digital solutions.",
+  },
+  {
+    title: "Food & Beverages",
+    img: "/food.avif",
+    description:
+      "Streamlining food & beverage processes with intelligent systems.",
+  },
+];
+
+export default function ServicesSection() {
   return (
-    <section className="py-20 px-4 bg-gray-50">
-      <div className="container mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-[#4B2E83] mb-4">
-            Your Industry? Our Expertise!
-          </h2>
-          <p className="text-lg text-gray-600 max-w-4xl mx-auto">
-            Dynamics Square brings decades of profound industry expertise that merges ongoing industry insights with Microsoft technology to help you capitalise on your biggest opportunities. As a trusted Microsoft Dynamics 365 implementation partner, we deliver solutions customised for your business growth. Whether you&apos;re in retail, manufacturing, education, or healthcare, we&apos;re the Microsoft Dynamics 365 implementation partner UK businesses trust to deliver measurable results.
-          </p>
-        </div>
+    <section className="py-20 px-6 bg-gray-50">
+      <h2 className="text-3xl md:text-4xl font-bold text-[#4B2E83] text-center mb-14">
+        Our Industry Expertise
+      </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {industries.map((industry, index) => (
-            <div
-              key={index}
-              className="relative group overflow-hidden rounded-lg cursor-pointer"
-            >
-              <div className="aspect-video bg-gradient-to-br from-purple-400 to-purple-600 relative">
-                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-colors"></div>
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="text-2xl font-bold text-white">{industry.name}</h3>
-                </div>
-              </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        {services.map((service, index) => (
+          <div
+            key={index}
+            className="group relative rounded-2xl overflow-hidden cursor-pointer"
+          >
+            {/* Image */}
+            <img
+              src={service.img}
+              alt={service.title}
+              className="w-full h-[380px] object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+
+            {/* Dark Overlay */}
+            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+            {/* Content */}
+            <div className="absolute bottom-0 left-0 w-full p-6 text-white z-10">
+              <h3 className="text-2xl font-semibold mb-3">
+                {service.title}
+              </h3>
+
+              {/* Hidden paragraph (appears on hover) */}
+              <p className="text-sm leading-relaxed opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                {service.description}
+              </p>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
+
+      {/* CTA Button */}
+      <div className="mt-14 text-center">
+        <a href="/industries/industries">
+          <button className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-7 py-3 rounded-lg transition">
+            Discover Our Industry Expertise
+            <HiArrowNarrowRight className="w-5 h-5" />
+          </button>
+        </a>
+      </div>
+
     </section>
   );
 }
-

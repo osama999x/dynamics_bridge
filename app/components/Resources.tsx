@@ -3,22 +3,26 @@ export default function Resources() {
     {
       type: 'Whitepaper',
       title: 'Microsoft Copilot: The Catalyst for Transformation in Your Business',
-      image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=300&fit=crop',
+      image: '/resource1.avif',
+      link: '/resources/white-papers', 
     },
     {
       type: 'Whitepaper',
       title: 'The Future of Finance Management',
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop',
+      image: '/resource2.avif',
+      link: '/resources/white-papers', 
     },
     {
       type: 'Guide',
       title: 'A Complete Guide to Dynamics CRM',
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop',
+      image: '/resource3.avif',
+      link: '/resources/guides', 
     },
     {
       type: 'Calculator',
       title: 'Dynamics 365 ERP Implementation Price Calculator',
-      image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=400&h=300&fit=crop',
+      image: '/resource4.avif',
+      link: '/resources/erp-calculator', 
     },
   ];
 
@@ -26,7 +30,7 @@ export default function Resources() {
     <section className="py-20 px-4 bg-white">
       <div className="container mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-[#4B2E83] mb-4">
+          <h2 className="text-3xl md:text-4xl text-[#4B2E83] mb-4">
             Resources & Insights
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
@@ -40,16 +44,27 @@ export default function Resources() {
               key={index}
               className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow"
             >
-              <div className="aspect-video bg-gradient-to-br from-purple-400 to-purple-600 relative">
-                <div className="absolute inset-0 bg-black/10"></div>
-              </div>
+              {/* Full Image */}
+              <img
+                src={resource.image}
+                alt={resource.title}
+                className="w-full h-auto object-cover"
+              />
+
               <div className="p-4">
                 <span className="inline-block bg-purple-100 text-[#4B2E83] text-xs font-semibold px-3 py-1 rounded-full mb-3">
                   {resource.type}
                 </span>
-                <h3 className="text-lg font-semibold text-[#4B2E83] mb-3">{resource.title}</h3>
-                <a href="#" className="text-[#4B2E83] font-semibold hover:underline">
-                  Read more →
+                <h3 className="text-lg text-[#4B2E83] mb-3">{resource.title}</h3>
+
+                {/* Animated Read More */}
+                <a
+                  href={resource.link}
+                  className="text-[#4B2E83] font-semibold relative inline-block group"
+                >
+                  Read more
+                  <span className="ml-1 inline-block transition-transform group-hover:translate-x-1">→</span>
+                  <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-[#4B2E83] transition-all group-hover:w-full"></span>
                 </a>
               </div>
             </div>
@@ -59,4 +74,3 @@ export default function Resources() {
     </section>
   );
 }
-

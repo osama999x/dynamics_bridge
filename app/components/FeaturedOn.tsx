@@ -1,40 +1,48 @@
+import React from "react";
+
 export default function FeaturedOn() {
   const platforms = [
-    { name: 'Manufacturing Today', logo: 'MT' },
-    { name: 'Tech Partner Impact Awards', logo: 'TPIA' },
-    { name: 'Forbes Technology Council', logo: 'FTC' },
-    { name: 'ERP Blog', logo: 'ERP' },
-    { name: 'MSDynamicsWorld', logo: 'MSDW' },
-    { name: 'Clutch', logo: 'Clutch' },
+    { logo: "/feat-1.avif" },
+    { logo: "/feat-2.png" },
+    { logo: "/feat-3.png" },
+    { logo: "/feat-4.png" },
+    { logo: "/feat-5.png" },
+    { logo: "/feat-6.avif" },
   ];
 
   return (
-    <section className="py-20 px-4 bg-white">
+    <section className="py-20 px-6 bg-white">
       <div className="container mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-[#4B2E83] mb-4">
+
+        {/* Heading */}
+        <div className="text-center mb-14">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-[#4B2E83] mb-4">
             Featured On
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            We are proud to share that our work and insights have appeared across respected platforms like Clutch, Manufacturing Today, Forbes Technology Council, Tech Partner Impact Awards, and ERPSoftwareBlog, reflecting the trust and recognition we carry.
+          <p className="text-gray-700 leading-relaxed max-w-3xl mx-auto">
+            Our expertise and insights have been recognized across leading
+            platforms including Manufacturing Today, Forbes Technology Council,
+            Tech Partner Impact Awards, ERP Blog, MSDynamicsWorld, and Clutch.
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center">
+        {/* Logos Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 items-center">
           {platforms.map((platform, index) => (
             <div
               key={index}
-              className="flex flex-col items-center justify-center p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+              className="flex items-center justify-center p-3"
             >
-              <div className="w-20 h-20 bg-gradient-to-br from-[#4B2E83] to-purple-600 rounded-lg flex items-center justify-center mb-3">
-                <span className="text-white font-bold text-sm text-center">{platform.logo}</span>
-              </div>
-              <p className="text-sm text-gray-600 text-center font-semibold">{platform.name}</p>
+              <img
+                src={platform.logo}
+                alt="Featured logo"
+                className="h-20 w-auto object-contain"
+              />
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );
 }
-

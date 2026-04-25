@@ -24,6 +24,6 @@ export default function Home() {
       <Contact />
       <Footer />
       <ChatButton />
-    </main>
+      </main>
   );
 }

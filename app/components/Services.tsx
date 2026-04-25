@@ -1,3 +1,6 @@
+import { HiArrowNarrowRight } from "react-icons/hi";
+import Link from "next/link";
+
 export default function Services() {
   const services = [
     {
@@ -8,6 +11,7 @@ export default function Services() {
       ),
       title: 'Consulting',
       description: 'We study how your business runs today and show where Microsoft Dynamics 365 can add real value. Every feature is matched carefully with your goals so that the system supports you in the best way.',
+      link: '/services/consultants',
     },
     {
       icon: (
@@ -18,6 +22,7 @@ export default function Services() {
       ),
       title: 'Implementation',
       description: 'From Dynamics 365 Business Central to Dynamics 365 Finance and other systems, we manage every part of setup. Our aim is to deliver a clean start that keeps daily work running without stress or stops.',
+      link: '/services/implementation',
     },
     {
       icon: (
@@ -27,6 +32,7 @@ export default function Services() {
       ),
       title: 'Upgrade',
       description: 'Our team works quietly in the background, so your systems stay smooth and strong. This helps your people focus fully on growing the business without worrying about slowdowns.',
+      link: '/services/upgrade',
     },
     {
       icon: (
@@ -36,6 +42,7 @@ export default function Services() {
       ),
       title: 'Ongoing Support',
       description: 'Dynamics Square stays beside you after the system goes live. Our experts keep things working at their best so you can stay focused on building success while feeling secure about your technology.',
+      link: '/services/support',
     },
   ];
 
@@ -43,11 +50,12 @@ export default function Services() {
     <section className="py-20 px-4 bg-white">
       <div className="container mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-[#4B2E83] mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#4B2E83] mb-4">
             Our Services: Simple, Clear, and Focused
           </h2>
+
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            At Dynamics Square, we bring far more than software setup. We help businesses reach full strength by guiding them with clear advice, smooth execution, and steady support. As a trusted Microsoft Business Solutions Partner, we make work simple by turning problems into chances for growth with consulting, careful delivery, and care that continues long after.
+            At Dynamics Zentrum, we bring far more than software setup. We help businesses reach full strength by guiding them with clear advice, smooth execution, and steady support. As a trusted Microsoft Business Solutions Partner, we make work simple by turning problems into chances for growth with consulting, careful delivery, and care that continues long after.
           </p>
         </div>
 
@@ -60,20 +68,30 @@ export default function Services() {
               <div className="text-[#4B2E83] mb-4">{service.icon}</div>
               <h3 className="text-xl font-bold text-[#4B2E83] mb-3">{service.title}</h3>
               <p className="text-gray-600 leading-relaxed">{service.description}</p>
-              <a href="#" className="text-[#4B2E83] font-semibold mt-4 inline-block hover:underline">
-                Learn more →
+              <a
+                href={service.link}
+                className="relative inline-block mt-4 text-[#4B2E83] font-semibold transition-all duration-300 group"
+              >
+                Learn more
+                <span className="ml-2 inline-block transform transition-transform duration-300 group-hover:translate-x-2">
+                  →
+                </span>
+                <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-[#4B2E83] transition-all duration-300 group-hover:w-full"></span>
               </a>
+
             </div>
           ))}
         </div>
 
         <div className="text-center mt-12">
-          <button className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
-            Explore More
-          </button>
+          <Link href="/services/our-services">
+            <button className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-lg font-semibold inline-flex items-center gap-2 transition-colors">
+              Explore More <HiArrowNarrowRight className="w-5 h-5" />
+            </button>
+          </Link>
         </div>
+
       </div>
     </section>
   );
 }
-

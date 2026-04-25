@@ -21,3 +21,61 @@ body {
 * {
   box-sizing: border-box;
 }
+.expertise-slider {
+  padding-bottom: 50px;
+}
+
+.expertise-slider .swiper-pagination {
+  bottom: 0 !important;
+}
+
+.expertise-slider .swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  background: #cbd5e1;
+  opacity: 1;
+  margin: 0 6px !important;
+}
+
+.expertise-slider .swiper-pagination-bullet-active {
+  background: #e11d48;
+}
+/* Keep slide width normal */
+.whyus-slider .swiper-slide {
+  width: auto !important;
+}
+
+/* Move dots below cards */
+.whyus-slider .swiper-pagination {
+  bottom: 0 !important;
+}
+
+/* Add this in globals.css or inside a <style> tag */
+.scrollbar-custom::-webkit-scrollbar {
+  height: 8px;               /* horizontal scrollbar height */
+}
+
+.scrollbar-custom::-webkit-scrollbar-track {
+  background: #E5E5E5;       /* light gray track */
+  border-radius: 4px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background-color: #4B2F7F; /* dark purple thumb */
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb:hover {
+  background-color: #361F5B; /* darker purple on hover */
+}
+
+/* Firefox scrollbar */
+.scrollbar-custom {
+  scrollbar-width: thin;
+  scrollbar-color: #4B2F7F #E5E5E5; 
+}
+
+
+
+
