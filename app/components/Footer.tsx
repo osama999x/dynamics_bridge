@@ -16,11 +16,7 @@ export default function Footer() {
               caters to organisations seeking next-gen Microsoft Business Apps.
             </p>
 
-            <div className="space-y-3 text-sm text-gray-300">
-              <p>Dynamics Zentrum<br/> 124 City Road, London, EC1V 2NX.</p>
-              <p>+44 798 858 6885</p>
-              <p>info@dynamicszentrum.com</p>
-            </div>
+            
           </div>
 
           {/* QUICK LINKS */}
