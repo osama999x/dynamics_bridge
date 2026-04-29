@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+// import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,9 +15,6 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Dynamics Zentrum - UK's Trusted Microsoft Dynamics 365 Partner",
   description: "As a certified Microsoft Dynamics 365 partner in the UK, we empower businesses with future-ready technologies that deliver impact.",
-   icons: {
-    icon: "/favicon(1).jpeg", 
-  },
 };
 
 export default function RootLayout({
