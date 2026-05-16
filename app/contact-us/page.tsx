@@ -3,6 +3,7 @@ import { useState } from 'react';
 import PageLayout from '@/app/components/PageLayout';
 
 export default function ContactUsPage() {
+
   const [formData, setFormData] = useState({
     name: '',
     jobTitle: '',
@@ -45,49 +46,49 @@ export default function ContactUsPage() {
   return (
     <PageLayout>
 
-      {/* HERO + FORM SECTION */}
-      <section className="bg-[#f5f6fb] py-20">
-        <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-16">
+      {/* HERO + FORM */}
+      <section className="bg-[#f5f6fb] py-12 md:py-20">
+        <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-10 md:gap-16 items-center">
 
           {/* LEFT */}
           <div>
-            <h1 className="text-5xl font-bold text-[#2d1b69] leading-tight mb-6">
+            <h1 className="text-3xl md:text-5xl font-bold text-[#2d1b69] leading-tight mb-4 md:mb-6">
               Ready for Digital <br />
               Transformation? Let’s <br />
               connect!
             </h1>
 
-            <p className="text-gray-600 text-lg mb-10 max-w-xl">
-              Get Microsoft solutions optimised for your business. 
+            <p className="text-gray-600 text-base md:text-lg mb-6 md:mb-10 max-w-xl">
+              Get Microsoft solutions optimised for your business.
               Be a future-ready organisation!
             </p>
 
-            <h3 className="text-xl font-semibold text-[#2d1b69] mb-6">
+            <h3 className="text-lg md:text-xl font-semibold text-[#2d1b69] mb-4 md:mb-6">
               Why Choose Dynamics Zentrum
             </h3>
 
-            <ul className="space-y-6">
+            <ul className="space-y-4 md:space-y-6">
               {[
                 "350+ Successful Implementations and Counting!",
                 "150+ Certified Professionals at Your Service!",
                 "4x Improved Productivity!",
                 "24/7 Support to Keep Your Business Up and Running!",
               ].map((text, i) => (
-                <li key={i} className="flex gap-4 items-start">
-                  <div className="w-10 h-10 bg-purple-100 text-purple-700 rounded-md flex items-center justify-center">
+                <li key={i} className="flex gap-3 md:gap-4 items-start">
+                  <div className="w-8 h-8 md:w-10 md:h-10 bg-purple-100 text-purple-700 rounded-md flex items-center justify-center text-sm md:text-base">
                     ✓
                   </div>
-                  <p className="text-gray-700">{text}</p>
+                  <p className="text-gray-700 text-sm md:text-base">{text}</p>
                 </li>
               ))}
             </ul>
           </div>
 
           {/* FORM */}
-          <div className="rounded-xl p-8 shadow-xl max-w-md ml-auto bg-white border">
+          <div className="rounded-xl p-6 md:p-8 shadow-xl w-full max-w-full md:max-w-md mx-auto lg:ml-auto bg-white border">
             <form onSubmit={handleSubmit} className="space-y-4">
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <input type="text" name="name" required placeholder="* Name"
                   value={formData.name} onChange={handleChange}
                   className="w-full px-4 py-3 rounded-md bg-gray-200 outline-none" />
@@ -101,10 +102,11 @@ export default function ContactUsPage() {
                 value={formData.email} onChange={handleChange}
                 className="w-full px-4 py-3 rounded-md bg-gray-200 outline-none" />
 
-              <div className="flex gap-3">
-                <select name="countryCode" value={formData.countryCode}
+              <div className="flex flex-col sm:flex-row gap-3">
+                <select name="countryCode"
+                  value={formData.countryCode}
                   onChange={handleChange}
-                  className="px-4 py-3 rounded-md bg-gray-200 w-28">
+                  className="px-4 py-3 rounded-md bg-gray-200 w-full sm:w-28">
                   <option>GB +44</option>
                   <option>US +1</option>
                   <option>PK +92</option>
@@ -115,12 +117,13 @@ export default function ContactUsPage() {
                   className="flex-1 px-4 py-3 rounded-md bg-gray-200 outline-none" />
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <input type="text" name="company" required placeholder="* Company name"
                   value={formData.company} onChange={handleChange}
                   className="w-full px-4 py-3 rounded-md bg-gray-200 outline-none" />
 
-                <select name="lookingFor" value={formData.lookingFor}
+                <select name="lookingFor"
+                  value={formData.lookingFor}
                   onChange={handleChange}
                   className="w-full px-4 py-3 rounded-md bg-gray-200">
                   <option>Looking for?</option>
@@ -135,28 +138,29 @@ export default function ContactUsPage() {
                 value={formData.requirements} onChange={handleChange}
                 className="w-full px-4 py-3 rounded-md bg-gray-200 outline-none" />
 
-              <label className="flex items-start gap-2 text-sm text-gray-600">
+              <label className="flex items-start gap-2 text-xs md:text-sm text-gray-600">
                 <input type="checkbox" name="agreeToTerms"
                   checked={formData.agreeToTerms}
                   onChange={handleChange} required />
                 I agree to the Privacy Policy and Terms of Service.
               </label>
 
-              <button type="submit" disabled={isSubmitting}
-                className="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-md font-semibold">
+              <button type="submit"
+                disabled={isSubmitting}
+                className="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-md font-semibold transition">
                 {isSubmitting ? 'Submitting...' : "Let’s Connect"}
               </button>
 
               {submitStatus === 'success' && (
-                <p className="text-green-600 text-sm mt-2">Form submitted successfully!</p>
+                <p className="text-green-600 text-sm">Form submitted successfully!</p>
               )}
               {submitStatus === 'error' && (
-                <p className="text-red-600 text-sm mt-2">Something went wrong.</p>
+                <p className="text-red-600 text-sm">Something went wrong.</p>
               )}
             </form>
 
-            <div className="mt-8 border-t pt-6 text-sm">
-              <h4 className="font-semibold text-lg mb-2">Get in touch Instantly</h4>
+            <div className="mt-6 md:mt-8 border-t pt-4 md:pt-6 text-sm">
+              <h4 className="font-semibold text-base md:text-lg mb-2">Get in touch Instantly</h4>
               <p>📧 info@dynamicszentrum.com</p>
             </div>
           </div>
@@ -164,47 +168,63 @@ export default function ContactUsPage() {
         </div>
       </section>
 
-      {/* 🔥 LOCATIONS SECTION */}
-      <section className="bg-[#f5f6fb] pb-20">
+      {/* LOCATIONS */}
+      <section className="bg-[#f5f6fb] pb-12 md:pb-20">
         <div className="container mx-auto px-4">
 
-          <h2 className="text-4xl font-bold mb-12">Locations</h2>
+          <h2 className="text-2xl md:text-4xl font-bold mb-8 md:mb-12">
+            Locations
+          </h2>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
 
-            <div className="bg-gray-100 rounded-2xl p-8 hover:shadow-xl transition">
-              <div className="text-2xl mb-4">🇬🇧</div>
-              <h3 className="text-xl font-semibold mb-3">London Office</h3>
-              <p className="mb-6 text-gray-700">
-                Suite 1835 <br />
-                124 City Road <br />
-                London EC1V 2NX <br />
-                United Kingdom
-              </p>
-              <p>+44 7988 586 885</p>
-            </div>
+            {[{
+              img: "/uk1.png",
+              title: "London Office",
+              address: `Suite 1835
+124 City Road
+London EC1V 2NX
+United Kingdom`,
+              phone: "+44 7988 586 885"
+            },
+            {
+              img: "/us.jpg",
+              title: "Wyoming Office",
+              address: `1910 Thomas Ave
+Cheyenne, WY 82001-3527
+United States`,
+              phone: "+1 307 427 2797"
+            },
+            {
+              img: "/pk.jpg",
+              title: "Pakistan Office",
+              address: `2nd Floor, Emirate Tower, M-13
+F-7 Markaz, Islamabad
+Pakistan`,
+              phone: "+92 307 510 4500"
+            }].map((loc, i) => (
 
-            <div className="bg-gray-100 rounded-2xl p-8 hover:shadow-xl transition">
-              <div className="text-2xl mb-4">🇺🇸</div>
-              <h3 className="text-xl font-semibold mb-3">Wyoming Office</h3>
-              <p className="mb-6 text-gray-700">
-                1910 Thomas Ave <br />
-                Cheyenne, WY 82001-3527 <br />
-                United States
-              </p>
-              <p>+1 307 427 2797</p>
-            </div>
+              <div key={i}
+                className="bg-gray-100 rounded-2xl p-6 md:p-8 hover:shadow-xl transition flex flex-col justify-between min-h-[280px] md:min-h-[320px]">
 
-            <div className="bg-gray-100 rounded-2xl p-8 hover:shadow-xl transition">
-              <div className="text-2xl mb-4">🇵🇰</div>
-              <h3 className="text-xl font-semibold mb-3">Pakistan Office</h3>
-              <p className="mb-6 text-gray-700">
-                2nd Floor, Emirate Tower, M-13 <br />
-                F-7 Markaz, Islamabad <br />
-                Pakistan
-              </p>
-              <p>+92 307 510 4500</p>
-            </div>
+                <div>
+                  <img src={loc.img} alt="" className="w-7 md:w-8 mb-3 md:mb-4 object-contain" />
+
+                  <h3 className="text-lg md:text-xl font-semibold mb-2 md:mb-3">
+                    {loc.title}
+                  </h3>
+
+                  <p className="text-sm md:text-base text-gray-700 whitespace-pre-line">
+                    {loc.address}
+                  </p>
+                </div>
+
+                <p className="mt-4 md:mt-6 text-sm md:text-base font-medium text-gray-800">
+                  Phone number: <span className="font-semibold">{loc.phone}</span>
+                </p>
+
+              </div>
+            ))}
 
           </div>
         </div>

@@ -15,6 +15,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Dynamics Zentrum - UK's Trusted Microsoft Dynamics 365 Partner",
   description: "As a certified Microsoft Dynamics 365 partner in the UK, we empower businesses with future-ready technologies that deliver impact.",
+ icons: {
+  icon: "/favicon.png",
+  shortcut: "/favicon.png",
+  apple: "/favicon.png",
+},
 };
 
 export default function RootLayout({
