@@ -44,10 +44,12 @@ export default function ContactUsPage() {
 
   return (
     <PageLayout>
+
+      {/* HERO + FORM SECTION */}
       <section className="bg-[#f5f6fb] py-20">
         <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-16">
 
-          {/* LEFT SIDE */}
+          {/* LEFT */}
           <div>
             <h1 className="text-5xl font-bold text-[#2d1b69] leading-tight mb-6">
               Ready for Digital <br />
@@ -81,79 +83,46 @@ export default function ContactUsPage() {
             </ul>
           </div>
 
-          {/* RIGHT FORM */}
+          {/* FORM */}
           <div className="rounded-xl p-8 shadow-xl max-w-md ml-auto bg-white border">
             <form onSubmit={handleSubmit} className="space-y-4">
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <input
-                  type="text"
-                  name="name"
-                  required
-                  placeholder="* Name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-md bg-gray-200 placeholder-gray-500 outline-none"
-                />
-                <input
-                  type="text"
-                  name="jobTitle"
-                  placeholder="Job title"
-                  value={formData.jobTitle}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-md bg-gray-200 placeholder-gray-500 outline-none"
-                />
+                <input type="text" name="name" required placeholder="* Name"
+                  value={formData.name} onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-md bg-gray-200 outline-none" />
+
+                <input type="text" name="jobTitle" placeholder="Job title"
+                  value={formData.jobTitle} onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-md bg-gray-200 outline-none" />
               </div>
 
-              <input
-                type="email"
-                name="email"
-                required
-                placeholder="* Work email"
-                value={formData.email}
-                onChange={handleChange}
-                className="w-full px-4 py-3 rounded-md bg-gray-200 placeholder-gray-500 outline-none"
-              />
+              <input type="email" name="email" required placeholder="* Work email"
+                value={formData.email} onChange={handleChange}
+                className="w-full px-4 py-3 rounded-md bg-gray-200 outline-none" />
 
               <div className="flex gap-3">
-                <select
-                  name="countryCode"
-                  value={formData.countryCode}
+                <select name="countryCode" value={formData.countryCode}
                   onChange={handleChange}
-                  className="px-4 py-3 rounded-md bg-gray-200 text-gray-600 outline-none w-28"
-                >
+                  className="px-4 py-3 rounded-md bg-gray-200 w-28">
                   <option>GB +44</option>
                   <option>US +1</option>
-                  <option>IN +91</option>
+                  <option>PK +92</option>
                 </select>
 
-                <input
-                  type="text"
-                  name="phone"
-                  placeholder="Phone number"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className="flex-1 px-4 py-3 rounded-md bg-gray-200 placeholder-gray-500 outline-none"
-                />
+                <input type="text" name="phone" placeholder="Phone number"
+                  value={formData.phone} onChange={handleChange}
+                  className="flex-1 px-4 py-3 rounded-md bg-gray-200 outline-none" />
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <input
-                  type="text"
-                  name="company"
-                  required
-                  placeholder="* Company name"
-                  value={formData.company}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-md bg-gray-200 placeholder-gray-500 outline-none"
-                />
+                <input type="text" name="company" required placeholder="* Company name"
+                  value={formData.company} onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-md bg-gray-200 outline-none" />
 
-                <select
-                  name="lookingFor"
-                  value={formData.lookingFor}
+                <select name="lookingFor" value={formData.lookingFor}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-md bg-gray-200 text-gray-600 outline-none"
-                >
+                  className="w-full px-4 py-3 rounded-md bg-gray-200">
                   <option>Looking for?</option>
                   <option>Consulting</option>
                   <option>Implementation</option>
@@ -161,32 +130,20 @@ export default function ContactUsPage() {
                 </select>
               </div>
 
-              <textarea
-                name="requirements"
-                required
-                rows={3}
+              <textarea name="requirements" required rows={3}
                 placeholder="* Any specific requirements?"
-                value={formData.requirements}
-                onChange={handleChange}
-                className="w-full px-4 py-3 rounded-md bg-gray-200 placeholder-gray-500 outline-none"
-              />
+                value={formData.requirements} onChange={handleChange}
+                className="w-full px-4 py-3 rounded-md bg-gray-200 outline-none" />
 
               <label className="flex items-start gap-2 text-sm text-gray-600">
-                <input
-                  type="checkbox"
-                  name="agreeToTerms"
+                <input type="checkbox" name="agreeToTerms"
                   checked={formData.agreeToTerms}
-                  onChange={handleChange}
-                  required
-                />
+                  onChange={handleChange} required />
                 I agree to the Privacy Policy and Terms of Service.
               </label>
 
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-md font-semibold disabled:opacity-50"
-              >
+              <button type="submit" disabled={isSubmitting}
+                className="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-md font-semibold">
                 {isSubmitting ? 'Submitting...' : "Let’s Connect"}
               </button>
 
@@ -194,44 +151,65 @@ export default function ContactUsPage() {
                 <p className="text-green-600 text-sm mt-2">Form submitted successfully!</p>
               )}
               {submitStatus === 'error' && (
-                <p className="text-red-600 text-sm mt-2">Something went wrong. Please try again.</p>
+                <p className="text-red-600 text-sm mt-2">Something went wrong.</p>
               )}
             </form>
 
-            {/* SUPPORT INFO BELOW BUTTON */}
-            <div className="mt-8 border-t pt-6 space-y-4 text-gray-700 text-sm">
+            <div className="mt-8 border-t pt-6 text-sm">
               <h4 className="font-semibold text-lg mb-2">Get in touch Instantly</h4>
-
-              <div className="flex items-center gap-2">
-                <span className="text-purple-600">📞</span>
-                <span>Technical Support: +44 798 858 6885</span>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <span className="text-purple-600">📧</span>
-                <span>Email Us: info@dynamicszentrum.com</span>
-              </div>
+              <p>📧 info@dynamicszentrum.com</p>
             </div>
-
           </div>
 
         </div>
       </section>
 
-      <style jsx>{`
-        .input {
-          width: 100%;
-          border: 1px solid #e5e7eb;
-          padding: 14px;
-          border-radius: 8px;
-          background: #f9fafb;
-          outline: none;
-        }
-        .input:focus {
-          border-color: #6b46c1;
-          background: white;
-        }
-      `}</style>
+      {/* 🔥 LOCATIONS SECTION */}
+      <section className="bg-[#f5f6fb] pb-20">
+        <div className="container mx-auto px-4">
+
+          <h2 className="text-4xl font-bold mb-12">Locations</h2>
+
+          <div className="grid md:grid-cols-3 gap-8">
+
+            <div className="bg-gray-100 rounded-2xl p-8 hover:shadow-xl transition">
+              <div className="text-2xl mb-4">🇬🇧</div>
+              <h3 className="text-xl font-semibold mb-3">London Office</h3>
+              <p className="mb-6 text-gray-700">
+                Suite 1835 <br />
+                124 City Road <br />
+                London EC1V 2NX <br />
+                United Kingdom
+              </p>
+              <p>+44 7988 586 885</p>
+            </div>
+
+            <div className="bg-gray-100 rounded-2xl p-8 hover:shadow-xl transition">
+              <div className="text-2xl mb-4">🇺🇸</div>
+              <h3 className="text-xl font-semibold mb-3">Wyoming Office</h3>
+              <p className="mb-6 text-gray-700">
+                1910 Thomas Ave <br />
+                Cheyenne, WY 82001-3527 <br />
+                United States
+              </p>
+              <p>+1 307 427 2797</p>
+            </div>
+
+            <div className="bg-gray-100 rounded-2xl p-8 hover:shadow-xl transition">
+              <div className="text-2xl mb-4">🇵🇰</div>
+              <h3 className="text-xl font-semibold mb-3">Pakistan Office</h3>
+              <p className="mb-6 text-gray-700">
+                2nd Floor, Emirate Tower, M-13 <br />
+                F-7 Markaz, Islamabad <br />
+                Pakistan
+              </p>
+              <p>+92 307 510 4500</p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
     </PageLayout>
   );
 }
