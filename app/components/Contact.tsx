@@ -150,10 +150,10 @@ export default function Contact() {
               />
 
               {/* CHECKBOX */}
-              <label className="flex items-start gap-2 text-xs md:text-sm text-gray-600">
+              {/* <label className="flex items-start gap-2 text-xs md:text-sm text-gray-600">
                 <input type="checkbox" required />
                 I agree to the Privacy Policy and Terms of Service.
-              </label>
+              </label> */}
 
               {/* BUTTON */}
               <button
