@@ -15,7 +15,9 @@ export async function POST(request: NextRequest) {
       requirements,
     } = body;
 
+    // ---------------------------
     // Validation
+    // ---------------------------
     if (!name || !email || !company || !requirements) {
       return NextResponse.json(
         {
@@ -26,11 +28,25 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Hostinger SMTP Transporter
+    // ---------------------------
+    // Basic sanitization
+    // ---------------------------
+    const safeRequirements = requirements
+      ?.replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+
+    const safeName = name
+      ?.replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+
+    // ---------------------------
+    // SMTP Transporter
+    // ---------------------------
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT),
-      secure: true, // Port 587
+      port: Number(process.env.SMTP_PORT), // 587
+      secure: false, // IMPORTANT for 587
+      requireTLS: true,
 
       auth: {
         user: process.env.SMTP_USER,
@@ -38,18 +54,14 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    // Verify SMTP Connection
-    await transporter.verify();
-
+    // ---------------------------
     // Send Email
+    // ---------------------------
     await transporter.sendMail({
       from: `"Dynamics Zentrum Contact Form" <${process.env.SMTP_FROM}>`,
-
       to: 'info@dynamicszentrum.com',
-
       replyTo: email,
-
-      subject: `New Contact Form Submission from ${name}`,
+      subject: `New Contact Form Submission from ${safeName}`,
 
       html: `
         <div style="font-family: Arial, sans-serif; padding:20px; line-height:1.6;">
@@ -61,7 +73,7 @@ export async function POST(request: NextRequest) {
           <table style="width:100%; border-collapse:collapse;">
             <tr>
               <td><strong>Name:</strong></td>
-              <td>${name}</td>
+              <td>${safeName}</td>
             </tr>
 
             <tr>
@@ -92,8 +104,7 @@ export async function POST(request: NextRequest) {
 
           <div style="margin-top:20px;">
             <strong>Requirements / Questions:</strong>
-
-            <p>${requirements}</p>
+            <p>${safeRequirements}</p>
           </div>
 
           <hr style="margin-top:30px;" />
@@ -118,7 +129,10 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         success: false,
-        error: error instanceof Error ? error.message : 'Failed to submit form',
+        error:
+          error instanceof Error
+            ? error.message
+            : 'Failed to submit form',
       },
       { status: 500 }
     );

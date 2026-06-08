@@ -2,18 +2,20 @@
 
 import { useState } from 'react';
 
+const initialFormState = {
+  name: '',
+  jobTitle: '',
+  email: '',
+  phone: '',
+  countryCode: '+92',
+  company: '',
+  lookingFor: '',
+  requirements: '',
+  agreeToTerms: false,
+};
+
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    jobTitle: '',
-    email: '',
-    phone: '',
-    countryCode: '+92',
-    company: '',
-    lookingFor: '',
-    requirements: '',
-    agreeToTerms: false,
-  });
+  const [formData, setFormData] = useState(initialFormState);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -28,14 +30,12 @@ export default function Contact() {
   ) => {
     const { name, value, type } = e.target;
 
-    const checked =
-      type === 'checkbox'
-        ? (e.target as HTMLInputElement).checked
-        : false;
-
     setFormData((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]:
+        type === 'checkbox'
+          ? (e.target as HTMLInputElement).checked
+          : value,
     }));
   };
 
@@ -57,17 +57,8 @@ export default function Contact() {
       if (res.ok) {
         setSubmitStatus('success');
 
-        setFormData({
-          name: '',
-          jobTitle: '',
-          email: '',
-          phone: '',
-          countryCode: '+92',
-          company: '',
-          lookingFor: '',
-          requirements: '',
-          agreeToTerms: false,
-        });
+        // ✅ ONLY CHANGE (RESET FORM)
+        setFormData(initialFormState);
       } else {
         setSubmitStatus('error');
       }
