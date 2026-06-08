@@ -4,91 +4,122 @@ import nodemailer from 'nodemailer';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { name, jobTitle, email, phone, company, lookingFor, requirements } = body;
 
-    // Validate required fields
+    const {
+      name,
+      jobTitle,
+      email,
+      phone,
+      company,
+      lookingFor,
+      requirements,
+    } = body;
+
+    // Validation
     if (!name || !email || !company || !requirements) {
       return NextResponse.json(
-        { error: 'Missing required fields' },
+        {
+          success: false,
+          error: 'Missing required fields',
+        },
         { status: 400 }
       );
     }
 
-    // Create email content
-    const emailSubject = `New Contact Form Submission from ${name}`;
-    const emailBody = `
-New contact form submission from Dynamics Square website:
-
-Name: ${name}
-Job Title: ${jobTitle || 'Not provided'}
-Email: ${email}
-Phone: ${phone || 'Not provided'}
-Company: ${company}
-Looking For: ${lookingFor || 'Not specified'}
-
-Requirements/Questions:
-${requirements}
-
----
-This email was sent from the contact form on Dynamics Square website.
-Reply to: ${email}
-    `.trim();
-
-    // Configure email transporter
-    // For production, use environment variables for SMTP credentials
-    // You can use Gmail, SendGrid, or any SMTP service
+    // Hostinger SMTP Transporter
     const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST || 'smtp.gmail.com',
-      port: parseInt(process.env.SMTP_PORT || '587'),
-      secure: false, // true for 465, false for other ports
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT),
+      secure: true, // Port 465
+
       auth: {
-        user: process.env.SMTP_USER, // Your email
-        pass: process.env.SMTP_PASSWORD, // Your email password or app password
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASSWORD,
       },
     });
 
-    // Send email
-    try {
-      await transporter.sendMail({
-        from: process.env.SMTP_FROM || process.env.SMTP_USER || 'noreply@dynamicssquare.co.uk',
-        to: 'Info@dynamicsbridge.net',
-        subject: emailSubject,
-        text: emailBody,
-        replyTo: email,
-      });
+    // Verify SMTP Connection
+    await transporter.verify();
 
-      return NextResponse.json(
-        { 
-          success: true, 
-          message: 'Form submitted successfully. We will contact you soon!' 
-        },
-        { status: 200 }
-      );
-    } catch (emailError) {
-      console.error('Email sending error:', emailError);
-      
-      // Fallback: Log the submission (for development)
-      console.log('Contact form submission (email failed):', {
-        to: 'Info@dynamicsbridge.net',
-        subject: emailSubject,
-        body: emailBody,
-      });
+    // Send Email
+    await transporter.sendMail({
+      from: `"Dynamics Zentrum Contact Form" <${process.env.SMTP_FROM}>`,
 
-      // Return success even if email fails (you can change this behavior)
-      // In production, you might want to use a service like Resend, SendGrid, etc.
-      return NextResponse.json(
-        { 
-          success: true, 
-          message: 'Form submitted successfully. We will contact you soon!',
-          note: 'Email service not configured. Please check server logs.'
-        },
-        { status: 200 }
-      );
-    }
-  } catch (error) {
-    console.error('Error processing contact form:', error);
+      to: 'info@dynamicszentrum.com',
+
+      replyTo: email,
+
+      subject: `New Contact Form Submission from ${name}`,
+
+      html: `
+        <div style="font-family: Arial, sans-serif; padding:20px; line-height:1.6;">
+          
+          <h2 style="color:#8B3A62;">
+            New Contact Form Submission
+          </h2>
+
+          <table style="width:100%; border-collapse:collapse;">
+            <tr>
+              <td><strong>Name:</strong></td>
+              <td>${name}</td>
+            </tr>
+
+            <tr>
+              <td><strong>Job Title:</strong></td>
+              <td>${jobTitle || 'Not provided'}</td>
+            </tr>
+
+            <tr>
+              <td><strong>Email:</strong></td>
+              <td>${email}</td>
+            </tr>
+
+            <tr>
+              <td><strong>Phone:</strong></td>
+              <td>${phone || 'Not provided'}</td>
+            </tr>
+
+            <tr>
+              <td><strong>Company:</strong></td>
+              <td>${company}</td>
+            </tr>
+
+            <tr>
+              <td><strong>Looking For:</strong></td>
+              <td>${lookingFor || 'Not specified'}</td>
+            </tr>
+          </table>
+
+          <div style="margin-top:20px;">
+            <strong>Requirements / Questions:</strong>
+
+            <p>${requirements}</p>
+          </div>
+
+          <hr style="margin-top:30px;" />
+
+          <p style="font-size:12px; color:#666;">
+            This email was sent from the Dynamics Zentrum contact form.
+          </p>
+        </div>
+      `,
+    });
+
     return NextResponse.json(
-      { error: 'Failed to process form submission' },
+      {
+        success: true,
+        message: 'Form submitted successfully',
+      },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error('CONTACT FORM ERROR:', error);
+
+    return NextResponse.json(
+      {
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to submit form',
+      },
       { status: 500 }
     );
   }

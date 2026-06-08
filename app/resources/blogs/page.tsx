@@ -1,195 +1,186 @@
 "use client";
+
 import { useState } from "react";
-import PageLayout from '@/app/components/PageLayout';
-
-const topics = [
-  "Business central",
-  "Power BI",
-  "Dynamics Nav",
-  "Comparison",
-  "Dynamics AX",
-  "Microsoft Dynamics 365",
-  "Dynamics 365 F&O",
-  "Microsoft Cloud",
-  "Power Platform",
-  "CRM",
-  "ERP",
-  "Field Service"
-];
-
-const allBlogs = [
-  {
-    title: "Best Business Central Partners in the UK for 2026",
-    category: "Business central",
-    desc: "Compare expertise, pricing, and support.",
-    author: "Alice Johnson",
-    date: "2026-01-29",
-    readingTime: "8 mins read"
-  },
-  {
-    title: "Business Central Implementation Guide",
-    category: "Business central",
-    desc: "Step-by-step implementation roadmap.",
-    author: "Michael Smith",
-    date: "2026-01-15",
-    readingTime: "10 mins read"
-  },
-  {
-    title: "Power BI Advanced Dashboard Guide",
-    category: "Power BI",
-    desc: "Transform decision-making with real-time insights.",
-    author: "Emma Davis",
-    date: "2026-02-01",
-    readingTime: "7 mins read"
-  },
-  {
-    title: "Power BI Data Modeling Best Practices",
-    category: "Power BI",
-    desc: "Build scalable BI models.",
-    author: "Robert Lee",
-    date: "2026-01-20",
-    readingTime: "9 mins read"
-  },
-  {
-    title: "Dynamics NAV Migration Guide",
-    category: "Dynamics Nav",
-    desc: "Migration planning strategies.",
-    author: "Sophia Brown",
-    date: "2026-01-10",
-    readingTime: "12 mins read"
-  },
-  // Add similar fields for all other blogs...
-];
+import PageLayout from "@/app/components/PageLayout";
 
 export default function BlogsPage() {
-  const [searchInput, setSearchInput] = useState(""); // input value
-  const [search, setSearch] = useState(""); // value used for filtering
+  const [searchInput, setSearchInput] = useState("");
+  const [search, setSearch] = useState("");
   const [activeTopic, setActiveTopic] = useState("");
 
-  const filteredBlogs = allBlogs.filter((blog) =>
-    (blog.title.toLowerCase().includes(search.toLowerCase()) ||
-     blog.desc.toLowerCase().includes(search.toLowerCase())) &&
-    (activeTopic ? blog.category === activeTopic : true)
+  const topics = [
+    "Business central",
+    "Power BI",
+    "Dynamics Nav",
+    "Comparison",
+    "Dynamics AX",
+    "Microsoft Dynamics 365",
+    "Dynamics 365 F&O",
+    "Microsoft Cloud",
+    "Power Platform",
+    "CRM",
+    "ERP",
+    "Field Service",
+  ];
+
+  const allBlogs = [
+    {
+      title: "Best Business Central Partners in the UK for 2026",
+      category: "Business central",
+      desc: "Compare expertise, pricing, and support for Microsoft Business Central implementations.",
+      author: "Alice Johnson",
+      date: "2026-01-29",
+      readingTime: "8 mins read",
+      image: "/blog/business-central.jpg", // ✅ public/blog/business-central.jpg
+    },
+    {
+      title: "Power BI Advanced Dashboard Guide",
+      category: "Power BI",
+      desc: "Transform decision-making with real-time dashboards and advanced analytics in Power BI.",
+      author: "Emma Davis",
+      date: "2026-02-01",
+      readingTime: "7 mins read",
+      image: "/blog/powerbi.jpg",
+    },
+  ];
+
+  const filteredBlogs = allBlogs.filter(
+    (blog) =>
+      (blog.title.toLowerCase().includes(search.toLowerCase()) ||
+        blog.desc.toLowerCase().includes(search.toLowerCase())) &&
+      (activeTopic ? blog.category === activeTopic : true)
   );
 
-  const handleSearchClick = () => {
-    setSearch(searchInput); // trigger search when button is clicked
-    setActiveTopic(""); // optional: clear topic when searching manually
-  };
+  const featuredBlog = allBlogs[0];
 
   return (
     <PageLayout>
+      {/* HERO SECTION */}
+      <div className="bg-[#1F2A44] py-16 px-4 text-center">
+        <h1 className="text-white text-3xl md:text-5xl font-bold mb-6">
+          Insights & Articles
+        </h1>
 
-      {/* SEARCH BAR CENTER */}
-      <div className="bg-gray-100 py-12">
-        <div className="container mx-auto flex justify-center">
-          <div className="flex w-full max-w-3xl">
-
+        <div className="flex justify-center">
+          <div className="flex w-full max-w-2xl bg-white rounded-full overflow-hidden shadow-lg">
             <input
               type="text"
-              placeholder="Search blog..."
-              className="flex-1 border border-gray-300 rounded-l-md px-5 py-3 focus:outline-none"
+              placeholder="Search Dynamics, Power BI, ERP..."
+              className="flex-1 px-5 py-3 outline-none"
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
             />
-
             <button
-              onClick={handleSearchClick}
-              className="bg-[#243B5A] text-white px-5 flex items-center justify-center rounded-r-md"
+              onClick={() => setSearch(searchInput)}
+              className="bg-[#E11D48] hover:bg-red-700 text-white px-6"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="8" cy="8" r="6"></circle>
-                <line x1="12.5" y1="12.5" x2="17" y2="17"></line>
-              </svg>
+              Search
             </button>
-
           </div>
         </div>
       </div>
 
-      {/* MAIN */}
-      <div className="container mx-auto py-16 px-4">
+      {/* FEATURED BLOG */}
+      <div className="container mx-auto px-4 mt-10">
+        <div className="bg-white rounded-2xl shadow-xl overflow-hidden grid md:grid-cols-2">
+
+          <img
+            src="/blog/blog.png"
+            alt={featuredBlog.title}
+            className="h-64 md:h-full w-full object-cover"
+          />
+          <div className="p-8 flex flex-col justify-center">
+            <span className="text-xs bg-[#E11D48] text-white px-3 py-1 rounded-full w-fit">
+              Featured Article
+            </span>
+
+            <h2 className="text-3xl font-bold mt-4 text-[#1F2A44]">
+              {featuredBlog.title}
+            </h2>
+
+            <p className="text-gray-600 mt-4">{featuredBlog.desc}</p>
+
+            <button className="mt-6 bg-[#1F2A44] text-white px-5 py-2 rounded-md hover:bg-black transition w-fit">
+              Read More →
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* MAIN SECTION */}
+      <div className="container mx-auto py-12 px-4">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-10">
 
           {/* SIDEBAR */}
-          <div>
-            <h3 className="text-xl font-semibold mb-6">Explore by Topic</h3>
+          <aside className="lg:sticky lg:top-24 h-fit">
+            <h3 className="text-lg font-bold text-[#1F2A44] mb-4">
+              Topics
+            </h3>
 
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-wrap lg:flex-col gap-2">
               {topics.map((topic, i) => (
                 <button
                   key={i}
                   onClick={() => setActiveTopic(topic)}
-                  className={`border rounded-full px-4 py-2 text-left
-                  ${
-                    activeTopic === topic
-                      ? "bg-red-700 text-white border-red-700"
-                      : "hover:bg-gray-100"
-                  }`}
+                  className={`text-sm px-4 py-2 rounded-full border transition duration-200 ${activeTopic === topic
+                      ? "bg-[#1F2A44] text-white border-[#1F2A44]"
+                      : "hover:bg-gray-100 text-gray-700"
+                    }`}
                 >
                   {topic}
                 </button>
               ))}
             </div>
-          </div>
+          </aside>
 
-          {/* BLOG LIST */}
-          <div className="lg:col-span-3 space-y-10">
+          {/* BLOG GRID */}
+          <div className="lg:col-span-3 grid md:grid-cols-2 gap-6">
             {filteredBlogs.length === 0 ? (
-              <p className="text-gray-500 text-xl">No blogs found.</p>
+              <p className="text-gray-500">No blogs found.</p>
             ) : (
               filteredBlogs.map((blog, i) => (
-                <div key={i} className="border-b pb-10">
-                  <h2 className="text-3xl font-bold mb-3">{blog.title}</h2>
+                <article
+                  key={i}
+                  className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition duration-300"
+                >
+                  <img
+                    src={blog.image}
+                    alt={blog.title}
+                    className="h-44 w-full object-cover"
+                  />
 
-                  {/* INFO LINE UNDER TITLE */}
-                  <div className="flex flex-wrap items-center text-red-600 text-sm gap-4 mb-4">
-                    {/* Author */}
-                    <div className="flex items-center gap-1">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M10 10a4 4 0 100-8 4 4 0 000 8zm-7 8a7 7 0 0114 0H3z" />
-                      </svg>
-                      <span>{blog.author}</span>
+                  <div className="p-5">
+                    <span className="text-xs bg-gray-100 px-3 py-1 rounded-full">
+                      {blog.category}
+                    </span>
+
+                    <h2 className="text-lg font-bold mt-3 text-[#1F2A44] hover:text-[#E11D48] transition">
+                      {blog.title}
+                    </h2>
+
+                    <div className="text-xs text-gray-500 flex flex-wrap gap-3 mt-2">
+                      <span>👤 {blog.author}</span>
+                      <span>📅 {blog.date}</span>
+                      <span>⏱ {blog.readingTime}</span>
                     </div>
 
-                    {/* Date */}
-                    <div className="flex items-center gap-1">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M6 2a1 1 0 011 1v1h6V3a1 1 0 112 0v1h1a2 2 0 012 2v11a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h1V3a1 1 0 011-1zM5 9h10v7H5V9z" />
-                      </svg>
-                      <span>{blog.date}</span>
-                    </div>
+                    <p className="text-gray-600 text-sm mt-3">
+                      {blog.desc}
+                    </p>
 
-                    {/* Reading time */}
-                    <div className="flex items-center gap-1">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 9H9V5h2v6z" />
-                      </svg>
-                      <span>{blog.readingTime}</span>
-                    </div>
-
-                    {/* Category */}
-                    <div className="flex items-center gap-1">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v3H3V4zm0 5h14v7a1 1 0 01-1 1H4a1 1 0 01-1-1V9z" />
-                      </svg>
-                      <span>{blog.category}</span>
-                    </div>
+                    <a
+                      href="#"
+                      className="text-[#E11D48] font-semibold text-sm mt-4 inline-block hover:underline"
+                    >
+                      Read Full Article →
+                    </a>
                   </div>
-
-                  {/* Description */}
-                  <p className="text-gray-600 mb-4">{blog.desc}</p>
-                  <a href="#" className="text-red-600 font-semibold">
-                    Read More →
-                  </a>
-                </div>
+                </article>
               ))
             )}
           </div>
-
         </div>
       </div>
-
     </PageLayout>
   );
 }

@@ -5,11 +5,11 @@ import Link from 'next/link';
 
 export default function Header() {
 
- const [mobileAccordion, setMobileAccordion] = useState<string | null>(null);
+  const [mobileAccordion, setMobileAccordion] = useState<string | null>(null);
 
-const toggleAccordion = (menu: string) => {
-  setMobileAccordion(mobileAccordion === menu ? null : menu);
-};
+  const toggleAccordion = (menu: string) => {
+    setMobileAccordion(mobileAccordion === menu ? null : menu);
+  };
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -99,7 +99,7 @@ const toggleAccordion = (menu: string) => {
       { title: 'Sana Commerce', desc: 'Avail a cloud e-commerce solution to supercharge your online store', icon: '/solutions/Sana_Commerce.png', link: '/solutions/sana-commerce' },
       { title: "Tasklet's Mobile WMS", desc: 'Optimize warehouse operations, simplify inventory, boost profits', icon: '/solutions/taskley-logo-im.png', link: '/solutions/tasklets-mobile-wms' },
       { title: 'Continia OCR', desc: 'Transform document management, streamline processing, manage easily', icon: '/solutions/continia.png', link: '/solutions/continia-ocr' },
-      { title: 'Expense Management', desc: 'Monitor corporate expenses', icon:'/solutions/continia.png', link: '/solutions/expense-management' },
+      { title: 'Expense Management', desc: 'Monitor corporate expenses', icon: '/solutions/continia.png', link: '/solutions/expense-management' },
       { title: 'Shopify Connector', desc: 'Synchronize orders, inventory, and customers across platforms', icon: '/solutions/shopify-integration-logo.svg', link: '/solutions/shopify-connector' },
       { title: 'Yavrio Integration', desc: 'Connect banking data to ERP for automated workflows', icon: '/solutions/image-541.png', link: '/solutions/yavrio-integration' },
     ],
@@ -218,25 +218,25 @@ const toggleAccordion = (menu: string) => {
             </div>
 
           </Link>
-       {/* Desktop Nav */}
-<nav className="hidden md:flex items-center gap-6">
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex items-center gap-6">
 
-  {/* ================= SOLUTIONS MEGA MENU ================= */}
-  <div
-    className="relative"
-    onMouseEnter={() => handleMouseEnter('solutions')}
-    onMouseLeave={handleMouseLeave}
-  >
-    <button className="flex items-center gap-1 hover:text-red-400 transition">
-      Solution
-      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-      </svg>
-    </button>
+            {/* ================= SOLUTIONS MEGA MENU ================= */}
+            <div
+              className="relative"
+              onMouseEnter={() => handleMouseEnter('solutions')}
+              onMouseLeave={handleMouseLeave}
+            >
+              <button className="flex items-center gap-1 hover:text-red-400 transition">
+                Solution
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
 
-    {openDropdown === 'solutions' && (
-      <div
-        className="
+              {openDropdown === 'solutions' && (
+                <div
+                  className="
           fixed
           left-1/2
           -translate-x-1/2
@@ -249,224 +249,223 @@ const toggleAccordion = (menu: string) => {
           p-8
           z-50
         "
-        onMouseEnter={() => handleMouseEnter('solutions')}
-        onMouseLeave={handleMouseLeave}
-      >
-        <div className="grid grid-cols-12 gap-4">
-
-          {/* Left Sidebar */}
-          <div className="col-span-3">
-            <div className="bg-white rounded-xl p-6 h-full">
-              <p
-                onClick={() => setActiveCategory('company')}
-                className="cursor-pointer text-sm font-semibold text-gray-900 mb-4"
-              >
-                Company By Size
-              </p>
-
-              {['ERP','CRM','Integration','Power Platform','Legacy Dynamics'].map(item => (
-                <div
-                  key={item}
-                  onClick={() => {
-                    setActiveCategory('solution');
-                    setActiveSolution(item);
-                  }}
-                  className={`py-2 px-3 mb-1 rounded-lg cursor-pointer font-medium text-sm ${
-                    activeSolution===item && activeCategory==='solution'
-                      ? 'bg-[#F1EEFA] text-[#4B2E83]'
-                      : 'text-gray-700 hover:bg-gray-100'
-                  }`}
+                  onMouseEnter={() => handleMouseEnter('solutions')}
+                  onMouseLeave={handleMouseLeave}
                 >
-                  {item}
-                </div>
-              ))}
-            </div>
-          </div>
+                  <div className="grid grid-cols-12 gap-4">
 
-          {/* Center Content */}
-          <div className="col-span-6">
-            <div className="bg-white rounded-xl p-6">
+                    {/* Left Sidebar */}
+                    <div className="col-span-3">
+                      <div className="bg-white rounded-xl p-6 h-full">
+                        <p
+                          onClick={() => setActiveCategory('company')}
+                          className="cursor-pointer text-sm font-semibold text-gray-900 mb-4"
+                        >
+                          Company By Size
+                        </p>
 
-              {activeCategory === 'solution' && (
-                <div className="grid grid-cols-2 gap-x-6 gap-y-4">
-                  {solutionCards[activeSolution]?.map(item => (
-                    <Link 
-                      key={item.title} 
-                      href={item.link} 
-                      className="block"
-                      onClick={() => setOpenDropdown(null)}
-                    >
-                      <div className="flex items-start gap-3 hover:bg-gray-50 rounded-lg p-3 transition cursor-pointer">
-                        <img src={item.icon} alt={item.title} className="w-9 h-9 mt-1 flex-shrink-0" />
-                        <div className="max-w-[260px]">
-                          <h4 className="text-[15px] font-semibold text-gray-900 whitespace-nowrap">
-                            {item.title}
+                        {['ERP', 'CRM', 'Integration', 'Power Platform', 'Legacy Dynamics'].map(item => (
+                          <div
+                            key={item}
+                            onClick={() => {
+                              setActiveCategory('solution');
+                              setActiveSolution(item);
+                            }}
+                            className={`py-2 px-3 mb-1 rounded-lg cursor-pointer font-medium text-sm ${activeSolution === item && activeCategory === 'solution'
+                                ? 'bg-[#F1EEFA] text-[#4B2E83]'
+                                : 'text-gray-700 hover:bg-gray-100'
+                              }`}
+                          >
+                            {item}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Center Content */}
+                    <div className="col-span-6">
+                      <div className="bg-white rounded-xl p-6">
+
+                        {activeCategory === 'solution' && (
+                          <div className="grid grid-cols-2 gap-x-6 gap-y-4">
+                            {solutionCards[activeSolution]?.map(item => (
+                              <Link
+                                key={item.title}
+                                href={item.link}
+                                className="block"
+                                onClick={() => setOpenDropdown(null)}
+                              >
+                                <div className="flex items-start gap-3 hover:bg-gray-50 rounded-lg p-3 transition cursor-pointer">
+                                  <img src={item.icon} alt={item.title} className="w-9 h-9 mt-1 flex-shrink-0" />
+                                  <div className="max-w-[260px]">
+                                    <h4 className="text-[15px] font-semibold text-gray-900 whitespace-nowrap">
+                                      {item.title}
+                                    </h4>
+                                    <p className="text-[13px] text-gray-600 mt-1 leading-snug line-clamp-2">
+                                      {item.desc}
+                                    </p>
+                                  </div>
+                                </div>
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+
+                        {activeCategory === 'company' && (
+                          <div className="grid grid-cols-2 gap-x-6 gap-y-4">
+                            {companySizeCards.map(item => (
+                              <Link
+                                key={item.title}
+                                href={item.link}
+                                className="block"
+                                onClick={() => setOpenDropdown(null)}
+                              >
+                                <div className="flex items-start gap-3 hover:bg-gray-50 rounded-lg p-3 transition cursor-pointer">
+                                  <img src={item.icon} alt={item.title} className="w-9 h-9 mt-1 flex-shrink-0" />
+                                  <div className="max-w-[260px]">
+                                    <h4 className="text-[15px] font-semibold text-gray-900 whitespace-nowrap">
+                                      {item.title}
+                                    </h4>
+                                    <p className="text-[13px] text-gray-600 mt-1 leading-snug line-clamp-2">
+                                      {item.desc}
+                                    </p>
+                                  </div>
+                                </div>
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+
+                      </div>
+                    </div>
+
+                    {/* Right Tool */}
+                    <div className="col-span-3">
+                      <div className="bg-white rounded-xl p-6 h-full flex flex-col justify-between">
+                        <div>
+                          <h4 className="text-sm font-semibold text-gray-900 mb-2">
+                            Get Your ERP Cost Estimate
                           </h4>
-                          <p className="text-[13px] text-gray-600 mt-1 leading-snug line-clamp-2">
-                            {item.desc}
+                          <p className="text-xs text-gray-600">
+                            Quick, free, and tailored to your business.
                           </p>
                         </div>
+
+                        <Link
+                          href="/resources/erp-calculator"
+                          onClick={() => setOpenDropdown(null)}
+                          className="mt-6 text-sm text-red-600 font-semibold inline-flex items-center gap-1 hover:gap-2 transition-all"
+                        >
+                          Check Now →
+                        </Link>
                       </div>
-                    </Link>
-                  ))}
+                    </div>
+
+                  </div>
                 </div>
               )}
 
-              {activeCategory === 'company' && (
-                <div className="grid grid-cols-2 gap-x-6 gap-y-4">
-                  {companySizeCards.map(item => (
-                    <Link 
-                      key={item.title} 
-                      href={item.link} 
-                      className="block"
-                      onClick={() => setOpenDropdown(null)}
-                    >
-                      <div className="flex items-start gap-3 hover:bg-gray-50 rounded-lg p-3 transition cursor-pointer">
-                        <img src={item.icon} alt={item.title} className="w-9 h-9 mt-1 flex-shrink-0" />
-                        <div className="max-w-[260px]">
-                          <h4 className="text-[15px] font-semibold text-gray-900 whitespace-nowrap">
-                            {item.title}
-                          </h4>
-                          <p className="text-[13px] text-gray-600 mt-1 leading-snug line-clamp-2">
-                            {item.desc}
-                          </p>
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              )}
-
             </div>
-          </div>
 
-          {/* Right Tool */}
-          <div className="col-span-3">
-            <div className="bg-white rounded-xl p-6 h-full flex flex-col justify-between">
-              <div>
-                <h4 className="text-sm font-semibold text-gray-900 mb-2">
-                  Get Your ERP Cost Estimate
-                </h4>
-                <p className="text-xs text-gray-600">
-                  Quick, free, and tailored to your business.
-                </p>
-              </div>
 
-              <Link
-                href="/resources/erp-calculator"
-                onClick={() => setOpenDropdown(null)}
-                className="mt-6 text-sm text-red-600 font-semibold inline-flex items-center gap-1 hover:gap-2 transition-all"
-              >
-                Check Now →
+
+
+
+
+            {/* Industries */}
+            <div
+              className="relative"
+              onMouseEnter={() => handleMouseEnter('industries')}
+              onMouseLeave={handleMouseLeave}
+            >
+              {/* Link wraps the button text */}
+              <Link href="/industries/industries" className="flex items-center gap-1 hover:text-red-400 transition-colors">
+                Industries
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
               </Link>
-            </div>
-          </div>
 
-        </div>
-      </div>
-    )}
+              {openDropdown === 'industries' && (
+                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-6 w-[900px] bg-white text-gray-800 rounded-xl shadow-2xl p-8">
+                  <div className="grid grid-cols-2 gap-x-6 gap-y-3">
+                    {industries.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className="flex gap-3 p-2 rounded-lg hover:bg-gray-50 transition block"
+                      >
+                        {/* Icon */}
+                        <div className="flex-shrink-0">
+                          <img src={item.icon} alt={item.name} className="w-10 h-10" />
+                        </div>
 
-  </div>
-
-
-
-
-
-
-           {/* Industries */}
-<div
-  className="relative"
-  onMouseEnter={() => handleMouseEnter('industries')}
-  onMouseLeave={handleMouseLeave}
->
-  {/* Link wraps the button text */}
-  <Link href="/industries/industries" className="flex items-center gap-1 hover:text-red-400 transition-colors">
-    Industries
-    <svg
-      className="w-4 h-4"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M19 9l-7 7-7-7"
-      />
-    </svg>
-  </Link>
-
-  {openDropdown === 'industries' && (
-    <div className="absolute top-full left-1/2 -translate-x-1/2 mt-6 w-[900px] bg-white text-gray-800 rounded-xl shadow-2xl p-8">
-      <div className="grid grid-cols-2 gap-x-6 gap-y-3">
-        {industries.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className="flex gap-3 p-2 rounded-lg hover:bg-gray-50 transition block"
-          >
-            {/* Icon */}
-            <div className="flex-shrink-0">
-              <img src={item.icon} alt={item.name} className="w-10 h-10" />
+                        {/* Text */}
+                        <div>
+                          <div className="font-semibold text-gray-900">{item.name}</div>
+                          <p className="text-sm text-gray-500 mt-1 leading-snug">
+                            {item.desc}
+                          </p>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
-            {/* Text */}
-            <div>
-              <div className="font-semibold text-gray-900">{item.name}</div>
-              <p className="text-sm text-gray-500 mt-1 leading-snug">
-                {item.desc}
-              </p>
+            {/* Our Services */}
+            <div
+              className="relative"
+              onMouseEnter={() => handleMouseEnter('services')}
+              onMouseLeave={handleMouseLeave}
+            >
+              {/* Link wraps the button text */}
+              <Link
+                href="/services/our-services"
+                className="flex items-center gap-1 hover:text-red-400 transition-colors"
+              >
+                Our Services
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </Link>
+
+              {openDropdown === 'services' && (
+                <div className="absolute top-full left-0 mt-2 w-64 bg-white text-gray-800 rounded-lg shadow-xl py-4">
+                  <div className="px-4 font-semibold mb-2 text-[#4B2E83]">Our Services</div>
+                  {services.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="block px-4 py-2 hover:bg-gray-100 transition-colors"
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
-          </Link>
-        ))}
-      </div>
-    </div>
-  )}
-</div>
-
-           {/* Our Services */}
-<div
-  className="relative"
-  onMouseEnter={() => handleMouseEnter('services')}
-  onMouseLeave={handleMouseLeave}
->
-  {/* Link wraps the button text */}
-  <Link
-    href="/services/our-services"
-    className="flex items-center gap-1 hover:text-red-400 transition-colors"
-  >
-    Our Services
-    <svg
-      className="w-4 h-4"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M19 9l-7 7-7-7"
-      />
-    </svg>
-  </Link>
-
-  {openDropdown === 'services' && (
-    <div className="absolute top-full left-0 mt-2 w-64 bg-white text-gray-800 rounded-lg shadow-xl py-4">
-      <div className="px-4 font-semibold mb-2 text-[#4B2E83]">Our Services</div>
-      {services.map((item) => (
-        <Link
-          key={item.href}
-          href={item.href}
-          className="block px-4 py-2 hover:bg-gray-100 transition-colors"
-        >
-          {item.name}
-        </Link>
-      ))}
-    </div>
-  )}
-</div>
 
             {/* Company */}
             <div
@@ -525,206 +524,208 @@ const toggleAccordion = (menu: string) => {
             </div>
           </nav>
 
-          {/* Contact Button */}
+           {/* Desktop Contact Button */}
           <Link
             href="/contact-us"
-            className="hidden md:block bg-white text-[#4B2E83] font-semibold px-6 py-2 rounded-lg shadow-md transition-colors duration-500 hover:bg-[#4B2E83] hover:text-white"
+            className="hidden md:block bg-white text-[#4B2E83] font-semibold px-6 py-2 rounded-lg shadow-md transition-all duration-300 hover:bg-red-700 hover:text-white"
           >
             Contact Us
           </Link>
 
-
-
           {/* Mobile Menu Button */}
-        <button
-  className="md:hidden"
-  onClick={() => setIsMenuOpen(!isMenuOpen)}
->
-  {isMenuOpen ? (
-    // ❌ CROSS ICON
-    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-    </svg>
-  ) : (
-    // ☰ HAMBURGER ICON
-    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-    </svg>
-  )}
-</button>
+          <button
+            className="md:hidden"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? (
+              // ❌ CROSS ICON
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              // ☰ HAMBURGER ICON
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            )}
+          </button>
         </div>
 
-      {/* Mobile Menu */}
-{isMenuOpen && (
- <nav className="md:hidden mt-4 pb-4 bg-white text-gray-800 rounded-lg shadow-lg max-h-[80vh] overflow-y-auto">
-    <div className="divide-y">
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <nav className="md:hidden mt-4 pb-4 bg-white text-gray-800 rounded-lg shadow-lg max-h-[80vh] overflow-y-auto">
+            <div className="divide-y">
 
-      {/* Company By Size */}
-      <div className="py-3">
-        <button
-          onClick={() => toggleAccordion("companySize")}
-          className="w-full flex justify-between items-center px-4 font-semibold"
-        >
-          Company By Size
-          <span>{mobileAccordion === "companySize" ? "−" : "+"}</span>
-        </button>
+              {/* Company By Size */}
+              <div className="py-3">
+                <button
+                  onClick={() => toggleAccordion("companySize")}
+                  className="w-full flex justify-between items-center px-4 font-semibold"
+                >
+                  Company By Size
+                  <span>{mobileAccordion === "companySize" ? "−" : "+"}</span>
+                </button>
 
-        {mobileAccordion === "companySize" && (
-          <div className="mt-2 space-y-2 pl-6">
-            {companySizeCards.map((item) => (
+                {mobileAccordion === "companySize" && (
+                  <div className="mt-2 space-y-2 pl-6">
+                    {companySizeCards.map((item) => (
+                      <Link
+                        key={item.link}
+                        href={item.link}
+                        className="block text-sm py-1"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Solutions */}
+              <div className="py-3">
+                <button
+                  onClick={() => toggleAccordion("solutions")}
+                  className="w-full flex justify-between items-center px-4 font-semibold"
+                >
+                  Solutions
+                  <span>{mobileAccordion === "solutions" ? "−" : "+"}</span>
+                </button>
+
+                {mobileAccordion === "solutions" && (
+                  <div className="mt-2 space-y-2 pl-6">
+                    {solutions.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className="block text-sm py-1"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Industries */}
+              <div className="py-3">
+                <button
+                  onClick={() => toggleAccordion("industries")}
+                  className="w-full flex justify-between items-center px-4 font-semibold"
+                >
+                  Industries
+                  <span>{mobileAccordion === "industries" ? "−" : "+"}</span>
+                </button>
+
+                {mobileAccordion === "industries" && (
+                  <div className="mt-2 space-y-2 pl-6">
+                    {industries.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className="block text-sm py-1"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Our Services */}
+              <div className="py-3">
+                <button
+                  onClick={() => toggleAccordion("services")}
+                  className="w-full flex justify-between items-center px-4 font-semibold"
+                >
+                  Our Services
+                  <span>{mobileAccordion === "services" ? "−" : "+"}</span>
+                </button>
+
+                {mobileAccordion === "services" && (
+                  <div className="mt-2 space-y-2 pl-6">
+                    {services.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className="block text-sm py-1"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Company */}
+              <div className="py-3">
+                <button
+                  onClick={() => toggleAccordion("company")}
+                  className="w-full flex justify-between items-center px-4 font-semibold"
+                >
+                  Company
+                  <span>{mobileAccordion === "company" ? "−" : "+"}</span>
+                </button>
+
+                {mobileAccordion === "company" && (
+                  <div className="mt-2 space-y-2 pl-6">
+                    {company.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className="block text-sm py-1"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Resources */}
+              <div className="py-3">
+                <button
+                  onClick={() => toggleAccordion("resources")}
+                  className="w-full flex justify-between items-center px-4 font-semibold"
+                >
+                  Resources
+                  <span>{mobileAccordion === "resources" ? "−" : "+"}</span>
+                </button>
+
+                {mobileAccordion === "resources" && (
+                  <div className="mt-2 space-y-2 pl-6">
+                    {resources.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className="block text-sm py-1"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+            </div>
+           {/* Mobile Contact Button */}
+            <div className="px-4 mt-4">
               <Link
-                key={item.link}
-                href={item.link}
-                className="block text-sm py-1"
+                href="/contact-us"
                 onClick={() => setIsMenuOpen(false)}
+                className="block w-full text-center bg-[#4B2E83] hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition-all duration-300"
               >
-                {item.title}
+                Contact Us
               </Link>
-            ))}
-          </div>
+               </div>
+
+          </nav>
         )}
-      </div>
-
-      {/* Solutions */}
-      <div className="py-3">
-        <button
-          onClick={() => toggleAccordion("solutions")}
-          className="w-full flex justify-between items-center px-4 font-semibold"
-        >
-          Solutions
-          <span>{mobileAccordion === "solutions" ? "−" : "+"}</span>
-        </button>
-
-        {mobileAccordion === "solutions" && (
-          <div className="mt-2 space-y-2 pl-6">
-            {solutions.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="block text-sm py-1"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* Industries */}
-      <div className="py-3">
-        <button
-          onClick={() => toggleAccordion("industries")}
-          className="w-full flex justify-between items-center px-4 font-semibold"
-        >
-          Industries
-          <span>{mobileAccordion === "industries" ? "−" : "+"}</span>
-        </button>
-
-        {mobileAccordion === "industries" && (
-          <div className="mt-2 space-y-2 pl-6">
-            {industries.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="block text-sm py-1"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* Our Services */}
-      <div className="py-3">
-        <button
-          onClick={() => toggleAccordion("services")}
-          className="w-full flex justify-between items-center px-4 font-semibold"
-        >
-          Our Services
-          <span>{mobileAccordion === "services" ? "−" : "+"}</span>
-        </button>
-
-        {mobileAccordion === "services" && (
-          <div className="mt-2 space-y-2 pl-6">
-            {services.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="block text-sm py-1"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* Company */}
-      <div className="py-3">
-        <button
-          onClick={() => toggleAccordion("company")}
-          className="w-full flex justify-between items-center px-4 font-semibold"
-        >
-          Company
-          <span>{mobileAccordion === "company" ? "−" : "+"}</span>
-        </button>
-
-        {mobileAccordion === "company" && (
-          <div className="mt-2 space-y-2 pl-6">
-            {company.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="block text-sm py-1"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* Resources */}
-      <div className="py-3">
-        <button
-          onClick={() => toggleAccordion("resources")}
-          className="w-full flex justify-between items-center px-4 font-semibold"
-        >
-          Resources
-          <span>{mobileAccordion === "resources" ? "−" : "+"}</span>
-        </button>
-
-        {mobileAccordion === "resources" && (
-          <div className="mt-2 space-y-2 pl-6">
-            {resources.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="block text-sm py-1"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </div>
-        )}
-      </div>
-
-    </div>
-     <Link
-      href="/contact-us"
-      className="m-4 block bg-[#4B2E83] text-white py-2 rounded-lg text-center"
-      onClick={() => setIsMenuOpen(false)}
-    >
-      Contact Us
-    </Link>
-  </nav>
-)}
       </div>
     </header>
   );
